@@ -1,9 +1,20 @@
-const express = require("express");
-var bodyParser = require("body-parser");
-
+const express = require('express')
+var bodyParser = require('body-parser')
+const mongoose = require('mongoose');
 const app = express();
+const {getUsers,addUsers}= require('C:/RJ Flutter/car-backend/controllers/userController');
+const connectionString =
+  "mongodb+srv://abdullahbinshahid154:BIDTw93bkwUnkztp@abs.am1i5.mongodb.net/?retryWrites=true&w=majority&appName=abs";
+
+mongoose
+  .connect(connectionString)
+  .then(() => console.log("Connected!"))
+  .catch((e) => console.log(e));
 
 const port = 3000;
+
+app.get("/getUsers",getUsers);
+app.post("/add-user",addUsers);
 
 console.log("hello world");
 app.use(bodyParser.json());
